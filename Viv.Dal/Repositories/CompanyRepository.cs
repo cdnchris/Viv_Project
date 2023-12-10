@@ -67,6 +67,11 @@ namespace Viv.Dal.Repositories
                 .Include(x => x.Employees)
                 .FirstOrDefaultAsync();
 
+            if(company is null)
+            {
+                return null;
+            }
+
             return new CompanyInfo
             {
                 CompanyCode = company.CompanyCode,
