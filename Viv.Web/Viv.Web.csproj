@@ -374,6 +374,10 @@
       <Project>{87b5f923-d027-4363-a4e0-c9105f27aa41}</Project>
       <Name>Viv.Bll</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Viv.Common\Viv.Common.csproj">
+      <Project>{C9EF836D-4AAC-4760-B71F-6B9C7C9F6C70}</Project>
+      <Name>Viv.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

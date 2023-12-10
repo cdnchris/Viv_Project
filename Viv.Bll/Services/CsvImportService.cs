@@ -1,13 +1,11 @@
 ﻿using CsvHelper;
-using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Viv.Bll.Models;
+using Viv.Common.Models;
 using Viv.Dal;
-using Viv.Dal.Entities;
 
 namespace Viv.Bll.Services
 {
@@ -29,7 +27,7 @@ namespace Viv.Bll.Services
             }
 
             var employees = importData
-                .Select(x => new Employee
+                .Select(x => new EmployeeInfo
                 {
                     Company_Id = x.CompanyId,
                     EmployeeDepartment = x.EmployeeDepartment,
@@ -37,21 +35,21 @@ namespace Viv.Bll.Services
                     EmployeeFirstName = x.EmployeeFirstName,
                     EmployeeLastName = x.EmployeeLastName,
                     EmployeeNumber = x.EmployeeNumber,
-                    HireDate = x.HireDate?.ToString(), //Conversion issue with Sqlite
+                    HireDate = x.HireDate,
                     ManagerEmployeeNumber = x.ManagerEmployeeNumber
                 }).ToList();
 
             var companies = importData
                 .GroupBy(x => x.CompanyId)
                 .Select(g => g.First())
-                .Select(x => new Company
+                .Select(x => new CompanyInfo
                 {
                     CompanyCode = x.CompanyCode,
                     CompanyDescription = x.CompanyDescription,
                     Id = x.CompanyId
                 }).ToList();
 
-            await ClearData();
+            await ClearAllDataAsync();
 
             //PLEASE NOTE: Under normal circumstances I would place the import data in a temporary table or some other store before
             //placing directly in a production table, in the case the data needed to be cleaned/double-checked/etc.

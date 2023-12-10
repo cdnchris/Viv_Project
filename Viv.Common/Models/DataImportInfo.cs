@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Viv.Bll.Models
+namespace Viv.Common.Models
 {
     public class DataImportInfo
     {

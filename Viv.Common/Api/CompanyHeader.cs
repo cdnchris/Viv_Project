@@ -1,4 +1,4 @@
-﻿namespace Viv.Bll.DataTransferObjects
+﻿namespace Viv.Common.Api
 {
     public class CompanyHeader
     {

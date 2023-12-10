@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Viv.Bll.DataTransferObjects;
+using Viv.Common.Api;
 using Viv.Dal;
 
 namespace Viv.Bll.Services
@@ -25,13 +25,13 @@ namespace Viv.Bll.Services
                     Code = x.CompanyCode,
                     Description = x.CompanyDescription,
                     Id = x.Id,
-                    EmployeeCount = x.Employees.Count()
+                    EmployeeCount = x.EmployeeCount
                 });
 
             return result;
         }
 
-        public async Task<CompanyDTO> GetCompany(int id)
+        public async Task<Company> GetCompany(int id)
         {
             var record = await _companyRepo.GetByIdAsync(id);
             if(record is null)
@@ -39,7 +39,7 @@ namespace Viv.Bll.Services
                 return null;
             }
 
-            var result = new CompanyDTO
+            var result = new Company
             {
                 Id = record.Id,
                 Code = record.CompanyCode,
@@ -55,7 +55,7 @@ namespace Viv.Bll.Services
             return result;
         }
 
-        public async Task<EmployeeDTO> GetEmployee(int companyId, string employeeNumber)
+        public async Task<Employee> GetEmployee(int companyId, string employeeNumber)
         {
             var record = await _employeeRepo.GetByIdAsync(companyId, employeeNumber);
             if(record is null)
@@ -63,30 +63,17 @@ namespace Viv.Bll.Services
                 return null;
             }
 
-            var emp = new EmployeeDTO
+            var emp = new Employee
             {
                 Department = record.EmployeeDepartment,
                 Email = record.EmployeeEmail,
                 EmployeeNumber = record.EmployeeNumber,
                 FullName = $"{record.EmployeeFirstName} {record.EmployeeLastName}",
-                HireDate = record.HireDate == null ? (DateTime?)null : DateTime.Parse(record.HireDate),
-                Managers = GetManagers(record.ManagerEmployee)
+                HireDate = record.HireDate,
+                Managers = record.Managers.Select(x => new EmployeeHeader { EmployeeNumber = x.EmployeeNumber, FullName = x.FullName})
             };
 
             return emp;
-        }
-
-        private IEnumerable<EmployeeHeader> GetManagers(Dal.Entities.Employee employee)
-        {
-            List<EmployeeHeader> results = new List<EmployeeHeader>();
-
-            if(employee.ManagerEmployee != null)
-            {
-                var mgr = employee.ManagerEmployee;
-                results.AddRange(GetManagers(mgr));
-            }
-
-            return results;
         }
     }
 }

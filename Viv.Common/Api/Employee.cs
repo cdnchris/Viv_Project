@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Viv.Bll.DataTransferObjects
+namespace Viv.Common.Api
 {
-    public class EmployeeDTO : EmployeeHeader
+    public class Employee : EmployeeHeader
     {
         public string Email { get; set; }
         public string Department { get; set; }

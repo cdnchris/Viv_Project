@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Viv.Bll.DataTransferObjects
+namespace Viv.Common.Api
 {
-    public class CompanyDTO : CompanyHeader
+    public class Company : CompanyHeader
     {
         public IEnumerable<EmployeeHeader> Employees { get; set; }
     }
