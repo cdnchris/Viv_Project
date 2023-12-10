@@ -25,7 +25,7 @@ namespace Viv.Dal.Repositories
             foreach(var item in items)
             {
                 //For this project I will simply reject the entire file if conditions aren't met so that the file can be fixed and resubmitted
-                if(!string.IsNullOrEmpty(item.ManagerEmployeeNumber.Trim()) && !items.Any(e => e.EmployeeNumber == item.ManagerEmployeeNumber && e.Company_Id == item.Company_Id))
+                if(!string.IsNullOrEmpty(item.ManagerEmployeeNumber?.Trim()) && !items.Any(e => e.EmployeeNumber == item.ManagerEmployeeNumber && e.Company_Id == item.Company_Id))
                 {
                     throw new Microsoft.Data.Sqlite.SqliteException($"Employee {item.EmployeeNumber} references manager {item.ManagerEmployeeNumber}, who is not in the same company.", 19);
                 }
