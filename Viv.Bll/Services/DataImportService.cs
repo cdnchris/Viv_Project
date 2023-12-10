@@ -19,18 +19,18 @@ namespace Viv.Bll.Services
 
         public abstract Task ImportDataAsync(byte[] fileData);
 
-        protected async Task ClearData()
+        public async virtual Task ClearAllDataAsync()
         {
             await _employeeRepo.ClearAllAsync();
             await _companyRepo.ClearAllAsync();
         }
 
-        protected async Task InsertCompanyData(IEnumerable<CompanyInfo> companies)
+        protected async virtual Task InsertCompanyData(IEnumerable<CompanyInfo> companies)
         {
             await _companyRepo.BatchInsertAsync(companies);
         }
 
-        protected async Task InsertEmployeeData(IEnumerable<EmployeeInfo> employees) 
+        protected async virtual Task InsertEmployeeData(IEnumerable<EmployeeInfo> employees) 
         {
             await _employeeRepo.BatchInsertAsync(employees);
         }

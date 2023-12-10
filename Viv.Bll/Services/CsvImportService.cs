@@ -49,7 +49,7 @@ namespace Viv.Bll.Services
                     Id = x.CompanyId
                 }).ToList();
 
-            await ClearData();
+            await ClearAllDataAsync();
 
             //PLEASE NOTE: Under normal circumstances I would place the import data in a temporary table or some other store before
             //placing directly in a production table, in the case the data needed to be cleaned/double-checked/etc.

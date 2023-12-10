@@ -64,7 +64,7 @@ namespace Viv.Dal.Repositories
                 .Include(x => x.ManagerEmployee)
                 .FirstOrDefaultAsync();
 
-            return employee.ToEmployeeInfo(GetManagers(employee));
+            return employee?.ToEmployeeInfo(GetManagers(employee));
         }
 
         public async Task<EmployeeInfo> GetByIdAsync(string id)
@@ -76,21 +76,29 @@ namespace Viv.Dal.Repositories
             return employee?.ToEmployeeInfo();
         }
 
-        private IEnumerable<ManagerInfo> GetManagers(Employee employee)
+        private IEnumerable<ManagerInfo> GetManagers(Employee employee, HashSet<Employee> addedEmployees = null)
         {
-            List<ManagerInfo> results = new List<ManagerInfo>
+            List<ManagerInfo> results = new List<ManagerInfo>();
+            if (addedEmployees is null)
             {
-                new ManagerInfo
+                //Initial call creates HashSet to track managers, sets initial employee
+                addedEmployees = new HashSet<Employee> { employee };
+            }
+            else
+            {
+                //First employee is not added
+                results.Add(new ManagerInfo
                 {
                     EmployeeNumber = employee.EmployeeNumber,
                     FullName = $"{employee.EmployeeFirstName} {employee.EmployeeLastName}"
-                }
-            };
+                });
+            }
 
-            if (employee.ManagerEmployee != null)
+            if (employee.ManagerEmployee != null && !addedEmployees.Contains(employee.ManagerEmployee))
             {
                 var mgr = employee.ManagerEmployee;
-                results.AddRange(GetManagers(mgr));
+                addedEmployees.Add(mgr);
+                results.AddRange(GetManagers(mgr, addedEmployees));
             }
 
             return results;

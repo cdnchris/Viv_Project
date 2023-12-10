@@ -10,13 +10,22 @@ using Viv.Bll;
 
 namespace Viv.Web.Controllers
 {
+    [RoutePrefix("DataStore")]
     public class DataStoreController : ApiController
     {
         [Inject]
         public IDataImportService ImportService { get; set; }
 
         [HttpPost]
-        [Route("DataStore")]
+        [Route("Clear")]
+        public async Task<HttpResponseMessage> Clear()
+        {
+            await ImportService.ClearAllDataAsync();
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        [Route("")]
         public async Task<HttpResponseMessage> Post()
         {
             if (!Request.Content.IsMimeMultipartContent())
