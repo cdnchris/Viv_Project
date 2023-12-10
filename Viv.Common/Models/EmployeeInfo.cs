@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace Viv.Bll.Models
+namespace Viv.Common.Models
 {
     public class EmployeeInfo
     {
@@ -12,5 +13,7 @@ namespace Viv.Bll.Models
         public DateTime? HireDate { get; set; }
         public string ManagerEmployeeNumber { get; set; }
         public int Company_Id { get; set; }
+
+        public IEnumerable<ManagerInfo> Managers { get; set; }
     }
 }

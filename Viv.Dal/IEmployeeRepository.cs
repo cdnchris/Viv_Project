@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using Viv.Dal.Entities;
+using Viv.Common.Models;
 
 namespace Viv.Dal
 {
-    public interface IEmployeeRepository : IRepository<Employee, string> 
+    public interface IEmployeeRepository : IRepository<EmployeeInfo, string> 
     {
-        Task<Employee> GetByIdAsync(int companyId, string employeeNumber);
+        Task<EmployeeInfo> GetByIdAsync(int companyId, string employeeNumber);
     }
 }

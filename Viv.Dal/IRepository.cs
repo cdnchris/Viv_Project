@@ -6,9 +6,7 @@ namespace Viv.Dal
     public interface IRepository<T, I> 
         where T : class
     {
-        Task InsertAsync(T entity);
-        Task BatchInsertAsync(IEnumerable<T> entities);
-        Task UpdateAsync(T entity);
+        Task BatchInsertAsync(IEnumerable<T> items);
         Task<T> GetByIdAsync(I id);
         Task<IEnumerable<T>> GetAllAsync();
         Task ClearAllAsync();

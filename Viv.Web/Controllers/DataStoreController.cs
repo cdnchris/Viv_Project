@@ -30,13 +30,19 @@ namespace Viv.Web.Controllers
             {
                 await Request.Content.ReadAsMultipartAsync(provider);
 
+                if(provider.Contents.Count() == 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "No file was provided");
+                }
+
                 foreach (var file in provider.Contents)
                 {
-                    //fileName = file.Headers.ContentDisposition.FileName.Trim('\"');
                     var fileData = await file.ReadAsByteArrayAsync();
 
                     await ImportService.ImportDataAsync(fileData);
 
+                    //Only process one file
+                    break;
                 }
 
             }

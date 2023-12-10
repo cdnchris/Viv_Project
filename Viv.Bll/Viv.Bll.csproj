@@ -71,14 +71,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransferObjects\CompanyDTO.cs" />
-    <Compile Include="DataTransferObjects\CompanyHeader.cs" />
-    <Compile Include="DataTransferObjects\EmployeeDTO.cs" />
-    <Compile Include="DataTransferObjects\EmployeeHeader.cs" />
     <Compile Include="IDataImportService.cs" />
-    <Compile Include="Models\CompanyInfo.cs" />
-    <Compile Include="Models\DataImportInfo.cs" />
-    <Compile Include="Models\EmployeeInfo.cs" />
     <Compile Include="Services\CompanyService.cs" />
     <Compile Include="DependencyInjection\BusinessModule.cs" />
     <Compile Include="ICompanyService.cs" />
@@ -91,10 +84,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Viv.Common\Viv.Common.csproj">
+      <Project>{c9ef836d-4aac-4760-b71f-6b9c7c9f6c70}</Project>
+      <Name>Viv.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Viv.Dal\Viv.Dal.csproj">
       <Project>{03560e3d-e326-41ee-8b87-caa4f16b02cc}</Project>
       <Name>Viv.Dal</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataTransferObjects\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

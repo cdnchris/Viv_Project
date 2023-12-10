@@ -1,30 +1,39 @@
-﻿using Ninject;
-using Ninject.Web.WebApi;
-using System;
-using System.Collections.Generic;
-using System.Web.Http.Dependencies;
-using Viv.Bll.DependencyInjection;
+﻿//using Ninject;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Web;
+//using System.Web.Http.Dependencies;
 
-namespace Viv.Web.DependencyInjection
-{
-    public class NinjectDependencyResolver : NinjectDependencyScope, IDependencyResolver
-    {
-        private readonly IKernel _kernel;
-        public NinjectDependencyResolver(IKernel kernel) : base(kernel) 
-        {
-            _kernel = kernel;
-            Bind();
-        }
+//namespace Viv.Web.DependencyInjection
+//{
+//    public class NinjectDependencyResolver : IDependencyResolver
+//    {
+//        private IKernel kernel;
 
-        public IDependencyScope BeginScope()
-        {
-            return new NinjectDependencyScope(_kernel);
-        }
+//        public NinjectDependencyResolver(IKernel kernelParam)
+//        {
+//            kernel = kernelParam;
+//        }
 
-        private void Bind()
-        {
-            _kernel.Load(new WebModule());
-            _kernel.Load(new BusinessModule());
-        }
-    }
-}
+//        public IDependencyScope BeginScope()
+//        {
+//            return this;
+//        }
+
+//        public void Dispose()
+//        {
+            
+//        }
+
+//        public object GetService(Type serviceType)
+//        {
+//            return kernel.TryGet(serviceType);
+//        }
+
+//        public IEnumerable<object> GetServices(Type serviceType)
+//        {
+//            return kernel.GetAll(serviceType);
+//        }
+//    }
+//}

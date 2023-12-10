@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Viv.Common.Models;
 using Viv.Dal;
-using Viv.Dal.Entities;
 
 namespace Viv.Bll.Services
 {
@@ -24,12 +25,12 @@ namespace Viv.Bll.Services
             await _companyRepo.ClearAllAsync();
         }
 
-        protected async Task InsertCompanyData(IEnumerable<Company> companies)
+        protected async Task InsertCompanyData(IEnumerable<CompanyInfo> companies)
         {
             await _companyRepo.BatchInsertAsync(companies);
         }
 
-        protected async Task InsertEmployeeData(IEnumerable<Employee> employees) 
+        protected async Task InsertEmployeeData(IEnumerable<EmployeeInfo> employees) 
         {
             await _employeeRepo.BatchInsertAsync(employees);
         }

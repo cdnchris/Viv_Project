@@ -8,7 +8,7 @@ namespace Viv.Web.DependencyInjection
     {
         public override void Load()
         {
-            Bind<DefaultFilterProviders>().ToConstant(new DefaultFilterProviders(GlobalConfiguration.Configuration.Services.GetFilterProviders()));
+            //Bind<DefaultFilterProviders>().ToConstant(new DefaultFilterProviders(GlobalConfiguration.Configuration.Services.GetFilterProviders()));
         }
     }
 }

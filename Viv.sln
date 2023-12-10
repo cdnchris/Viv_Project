@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viv.Bll", "Viv.Bll\Viv.Bll.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viv.Web", "Viv.Web\Viv.Web.csproj", "{D3BE22EB-08CC-4FBA-97E9-3B6A61B3F486}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viv.Common", "Viv.Common\Viv.Common.csproj", "{C9EF836D-4AAC-4760-B71F-6B9C7C9F6C70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D3BE22EB-08CC-4FBA-97E9-3B6A61B3F486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3BE22EB-08CC-4FBA-97E9-3B6A61B3F486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3BE22EB-08CC-4FBA-97E9-3B6A61B3F486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9EF836D-4AAC-4760-B71F-6B9C7C9F6C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9EF836D-4AAC-4760-B71F-6B9C7C9F6C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9EF836D-4AAC-4760-B71F-6B9C7C9F6C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9EF836D-4AAC-4760-B71F-6B9C7C9F6C70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

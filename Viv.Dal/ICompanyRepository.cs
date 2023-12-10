@@ -1,6 +1,6 @@
-﻿using Viv.Dal.Entities;
+﻿using Viv.Common.Models;
 
 namespace Viv.Dal
 {
-    public interface ICompanyRepository : IRepository<Company, int> { }
+    public interface ICompanyRepository : IRepository<CompanyInfo, int> { }
 }

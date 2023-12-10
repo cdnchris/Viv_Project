@@ -99,6 +99,7 @@
     <Compile Include="DependencyInjection\DataModule.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="ICompanyRepository.cs" />
     <Compile Include="IEmployeeRepository.cs" />
     <Compile Include="IRepository.cs" />
@@ -109,6 +110,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Viv.Common\Viv.Common.csproj">
+      <Project>{c9ef836d-4aac-4760-b71f-6b9c7c9f6c70}</Project>
+      <Name>Viv.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -3,38 +3,33 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Viv.Bll;
-using Viv.Bll.DataTransferObjects;
-using Viv.Bll.Services;
+using Viv.Common.Api;
 
 namespace Viv.Web.Controllers
 {
+    [RoutePrefix("Companies")]
     public class CompaniesController : ApiController
     {
         [Inject]
         public ICompanyService CompanyService { get; set; }
-        //private readonly ICompanyService _companyService;
-        //public CompaniesController()
-        //{
-        //    _companyService = new CompanyService();
-        //}
 
         [HttpGet]
-        [Route("Companies")]
-        public async Task<IEnumerable<CompanyHeader>> GetCompanues()
+        [Route("")]
+        public async Task<IEnumerable<CompanyHeader>> GetCompanies()
         {
             return await CompanyService.GetCompaniesAsync();
         }
 
         [HttpGet]
-        [Route("Companies/{companyId}")]
-        public async Task<CompanyDTO> GetCompany(int companyId)
+        [Route("{companyId:int}")]
+        public async Task<Company> GetCompany(int companyId)
         {
             return await CompanyService.GetCompany(companyId);
         }
 
         [HttpGet]
-        [Route("Companies/{companyId}/Employees/{employeeNumber}")]
-        public async Task<EmployeeDTO> GetEmployee(int companyId, string employeeNumber)
+        [Route("{companyId:int}/Employees/{employeeNumber}")]
+        public async Task<Employee> GetEmployee(int companyId, string employeeNumber)
         {
             return await CompanyService.GetEmployee(companyId, employeeNumber);
         }
