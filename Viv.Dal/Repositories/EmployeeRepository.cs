@@ -21,7 +21,20 @@ namespace Viv.Dal.Repositories
 
         public async Task BatchInsertAsync(IEnumerable<EmployeeInfo> items)
         {
-            //Using extension library, otherwise would look at adding a range and saving
+            //checking validity of Data
+            foreach(var item in items)
+            {
+                //For this project I will simply reject the entire file if conditions aren't met so that the file can be fixed and resubmitted
+                if(!string.IsNullOrEmpty(item.ManagerEmployeeNumber.Trim()) && !items.Any(e => e.EmployeeNumber == item.ManagerEmployeeNumber && e.Company_Id == item.Company_Id))
+                {
+                    throw new Microsoft.Data.Sqlite.SqliteException($"Employee {item.EmployeeNumber} references manager {item.ManagerEmployeeNumber}, who is not in the same company.", 19);
+                }
+                if(items.Count(e => e.Company_Id == item.Company_Id && e.EmployeeNumber == item.EmployeeNumber) > 1)
+                {
+                    throw new Microsoft.Data.Sqlite.SqliteException($"Duplicate key violation: EmployeeNumber {item.EmployeeNumber}, Company_Id {item.Company_Id}", 1555);
+                }
+            }
+            
             var entities = items.Select(x => new Employee
             {
                 Company_Id = x.Company_Id,
@@ -34,6 +47,7 @@ namespace Viv.Dal.Repositories
                 ManagerEmployeeNumber = x.ManagerEmployeeNumber
             });
 
+            //Using extension library, otherwise would look at adding a range and saving
             await _context.BulkInsertAsync(entities);
         }
 
@@ -94,7 +108,7 @@ namespace Viv.Dal.Repositories
                 });
             }
 
-            if (employee.ManagerEmployee != null && !addedEmployees.Contains(employee.ManagerEmployee))
+            if (employee.ManagerEmployee != null && !addedEmployees.Contains(employee.ManagerEmployee) && employee.ManagerEmployee.Company_Id == employee.Company_Id)
             {
                 var mgr = employee.ManagerEmployee;
                 addedEmployees.Add(mgr);

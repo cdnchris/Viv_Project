@@ -21,14 +21,11 @@ namespace Viv.Dal.Context
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>()
-                .HasKey(e => e.EmployeeNumber);
-                //.HasRequired(e => e.Company)
-                //.WithMany(c => c.Employees)
-                //.HasForeignKey(e => e.EmployeeNumber)
-                //.WillCascadeOnDelete(false);
+                .HasKey(e => new { e.EmployeeNumber, e.Company_Id });
 
-            modelBuilder.Entity<Company>()
-                .HasKey(c => c.Id);
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.EmployeeNumber)
+                .IsRequired();
 
             //REQUIRE PROPERTIES
         }
